@@ -1,6 +1,7 @@
 import './bootstrap';
 import '../css/app.css';
-
+import { createApp } from 'vue';
+import App from './App.vue'; // Importa 'createApp' y 'h' desde Vue
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -8,8 +9,11 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
 
+const app = createApp(App);
 
-// Vue.component('calendar-component', require('./Components/CalendarComponent.vue').default);
+ Vue.component('calendar-component', require('./Components/CalendarComponent.vue').default);
+
+ app.mount('#app');
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -23,4 +27,4 @@ createInertiaApp({
     progress: {
         color: '#4B5563',
     },
-}
+});
