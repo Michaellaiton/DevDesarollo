@@ -1,19 +1,15 @@
-import './bootstrap';
 import '../css/app.css';
-import { createApp } from 'vue';
-import App from './App.vue'; // Importa 'createApp' y 'h' desde Vue
 import { createApp, h } from 'vue';
+// import App from './App.vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+// import CalendarComponent from './components/CalendarComponent.vue';
+// import Vue from 'vue';
+
+
+
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
-
-
-const app = createApp(App);
-
- Vue.component('calendar-component', require('./Components/CalendarComponent.vue').default);
-
- app.mount('#app');
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -28,3 +24,10 @@ createInertiaApp({
         color: '#4B5563',
     },
 });
+
+// Vue.component('calendar-component', CalendarComponent);
+
+// const app = new Vue({
+//     el: '#app',
+// });
+

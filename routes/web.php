@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MailController;
@@ -34,3 +35,16 @@ Route::middleware([
 
 
 Route::get('/notification', [MailController::class, 'sendEmail'])->name('notification');
+
+Route::get('/calendar/index', [CalendarController::class, 'index'])->name('calendar.index');
+Route::post('/calendar', [CalendarController::class, 'store'])->name('calendar.store');
+Route::patch('/calendar/update/{id}', [CalendarController::class, 'update'])->name('calendar.update');
+Route::delete('/calendar/destroy/{id}', [CalendarController::class, 'destroy'])->name('calendar.destroy');
+
+// Route::resources([
+//     'calendar' => CalendarController::class,
+// ]);
+
+// Route::get('/calendar', [CalendarController::class, 'index']);
+// Route::get('/events', [CalendarController::class, 'getEvents']);
+// Route::post('/events', [CalendarController::class, 'createEvent']);

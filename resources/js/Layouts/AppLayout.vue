@@ -156,6 +156,13 @@ const logout = () => {
                                     <span class="flex-1 ms-3 whitespace-nowrap ">Permisos</span>
                                 </Link>
                             </li>
+                            <li>
+                                <Link :href="route('calendar.index')" :active="route().current('calendar.*')" class="flex items-center p-2 text-slate-100 rounded-lg dark:text-cla hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-black group" @click="mostrarComponente">
+                                <font-awesome-icon icon="users"/>
+                                <span class="flex-1 ms-3 whitespace-nowrap ">Calendario</span>
+                                </Link>
+                            </li>
+
                         </ul>
                     </div>
                 </aside>

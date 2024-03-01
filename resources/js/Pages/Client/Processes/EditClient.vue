@@ -24,6 +24,7 @@
 
 <template>
     <AppLayout title="Editar Cliente">
+        {{ props }}
         <template #header>
             <h1 class="font-semibold text-xl text-gray-800 leading-tight" >Editar Clientes</h1>
         </template>

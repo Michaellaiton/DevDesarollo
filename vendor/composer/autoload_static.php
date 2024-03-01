@@ -397,8 +397,8 @@ class ComposerStaticInitcb61a2ad490434697402af04335bcf1e
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -666,7 +666,6 @@ class ComposerStaticInitcb61a2ad490434697402af04335bcf1e
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\CalendarController' => __DIR__ . '/../..' . '/app/Http/Controllers/CalendarController.php',
-        'App\\Http\\Controllers\\CalendarResourceController' => __DIR__ . '/../..' . '/app/Http/Controllers/CalendarResourceController.php',
         'App\\Http\\Controllers\\ClientController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClientController.php',
         'App\\Http\\Controllers\\CompañiaController' => __DIR__ . '/../..' . '/app/Http/Controllers/CompañiaController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
@@ -686,11 +685,9 @@ class ComposerStaticInitcb61a2ad490434697402af04335bcf1e
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\PermissionRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PermissionRequest.php',
-        'App\\Http\\Resources\\CalendarResource' => __DIR__ . '/../..' . '/app/Http/Resources/CalendarResource.php',
         'App\\Imports\\UsersImport' => __DIR__ . '/../..' . '/app/Imports/UsersImport.php',
         'App\\Mail\\TestMail' => __DIR__ . '/../..' . '/app/Mail/TestMail.php',
-        'App\\Models\\Calendar' => __DIR__ . '/../..' . '/app/Models/Calendar.php',
-        'App\\Models\\CalendarResource' => __DIR__ . '/../..' . '/app/Models/CalendarResource.php',
+        'App\\Models\\Booking' => __DIR__ . '/../..' . '/app/Models/Booking.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',

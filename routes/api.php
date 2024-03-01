@@ -19,4 +19,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('/calendario', CalendarController::class);
+
+// Route::prefix('calendario')->group(function () {
+//     Route::get('/', [CalendarController::class, 'index']);
+//     Route::post('/', [CalendarController::class, 'store']);
+//     Route::get('/{calendar}', [CalendarController::class, 'show']);
+//     Route::put('/{calendar}', [CalendarController::class, 'update']);
+//     Route::delete('/{calendar}', [CalendarController::class, 'destroy']);
+// });

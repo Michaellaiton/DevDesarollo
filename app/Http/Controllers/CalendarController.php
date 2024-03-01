@@ -2,103 +2,73 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CalendarResource;
-use App\Models\Calendar;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Response;
+use App\Models\Booking;
 use Illuminate\Http\Request;
+
+
 
 class CalendarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //
+
     public function index()
     {
-        //
-        return CalendarResource::collection(Calendar::all());
+    $events = array();
+    $bookings = Booking::all();
+    foreach ($bookings as $booking){
+        $events[]= [
+            'id'  => $booking->id,
+            'title' => $booking->title,
+            'start' => $booking->start_date,
+            'end' => $booking->end_date,
+        ];
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+
+
+
+    return view('calendar.index', ['events' => $events]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
-        $new_calendar = Calendar::create($request->all());
-        return response()->jdson([
-            'data' => new CalendarResource($new_calendar),
-            'message' => 'Nuevo evento agregado exitosamente',
-            'status' => Response::HTTP_CREATED
-
+        $request->validate([
+            'title' => 'required|string'
         ]);
+        $booking = Booking::create([
+            'title' => $request->title,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
+
+        return response()->json($booking);
+    }
+
+    public function update(Request $request ,$id){
+        $booking = Booking::find($id);
+        if(!$booking){
+            return response()->json([
+                'error' => 'No se puede localizar el evento'
+            ], 404);
         }
+        $booking->update([
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Calendar  $calendar
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Calendar $calendar)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Calendar  $calendar
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Calendar $calendar)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Calendar  $calendar
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Calendar $calendar)
-    {
-        //
-        $calendar->update($request->all());
-        return  response()->json([
-            'date' => new CalendarResource($calendar),
-            'message' => 'Nuevo evento agregado exitosamente',
-            'status' => Response::HTTP_CREATED
         ]);
+        return response()->json('Event Updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Calendar  $calendar
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Calendar $calendar)
+    public function  destroy($id)
     {
-        //
-        $calendar->delete();
-        return response('Event renoved sucessfully', response::HTTP_CREATED);
+        dd($id);
+        $booking = Booking::find($id);
+        if(!$booking){
+            return response()->json([
+                'error' => 'No se puede localizar el evento'
+            ], 404);
+        }
+        $booking->delete();
+        return $id;
     }
 }
