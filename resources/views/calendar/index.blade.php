@@ -16,13 +16,27 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="{{ mix('js/app.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <style>
+            .fc-event{
+                width: 140px;
+                height: 85px;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: center;
+            }
+        </style>
     </head>
     <body>
-
+        <div id="app">
+            <calendar-component></calendar-component>
+        </div>
+{{--
         <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Launch demo modal
-  </button>
+  </button> --}}
 
   <!-- Modal -->
   <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -88,6 +102,7 @@
                 events:booking,
                 selectable: true,
                 selectHelper: true,
+                defaultView: 'month',
                 select: function(start, end, allDays) {
                     $('#bookingModal').modal('toggle');
 
@@ -108,8 +123,9 @@
                                 $('#bookingModal').modal('hide')
                                 $('#calendar').fullCalendar('renderEvent',{
                                     'title': response.title,
-                                    'start': response.start_date,
-                                    'end': response.end_date
+                                    'start': response.start,
+                                    'end': response.end,
+                                    'color' : response.color
                                 })
 
 
@@ -160,35 +176,46 @@
                             },
                         });
                 },
-                eventClick: function(event){
-                    var id = event.id;
+                eventClick: function(event) {
+                     var id = event.id;
 
                     if(confirm('Are you sure you want to remove it')){
-
-                    $.ajax({
-
-                        url:"{{route('calendar.destroy', '') }}" + '/'+ id,
-                        type: "DELETE",
-                        dataType:'json',
-                        success:function(response)
-                        {
-
-                            var id =  response.id
-                            console.log(id)
-                            swal("Good job!", "Event Deleted!!", "success");
-
-
-                        },
-                        error:function(error){
-
-                                console.log(error);
-                        },
+                   $.ajax({
+                                url: "{{ route('calendar.destroy', '') }}" +'/'+ id,
+                                type: "DELETE",
+                                dataType: 'json',
+                                success: function(response)
+                                {
+                                    $('#calendar').fullCalendar('removeEvents', response.id);
+                                    swal("Good job!", "Event Deleted!!", "success");
+                                },
+                                error: function(error)
+                                {
+                                        console.log(error)
+                                },
                         });
-                    }
                 }
+                },
+                selectAllow: function (event) {
+                    return moment(event.start).utcOffset(false).isSame(moment(event.end).subtract(1, 'second').utcOffset(false), 'day');
+                },
+            });
 
-            })
+            $('#bookingModal').on("hidden.bs.modal", function() {
+                 $('#saveBtn').unbind();
+
+            });
+
+            // $('.fc-event').css('font-size','13px');
+            // $('.fc-event').css('width','20px');
+            // $('.fc-event').css('border-radius','20%');
+
+            // $('.fc').css('background-color','#WHITE ')
+
         });
-    </script>
+
+        <script src="{{ mix('js/app.js') }}"></script>
+        </script>
     </body>
     </html>
+

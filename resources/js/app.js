@@ -1,11 +1,11 @@
 import '../css/app.css';
 import { createApp, h } from 'vue';
-// import App from './App.vue';
+import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
-// import CalendarComponent from './components/CalendarComponent.vue';
-// import Vue from 'vue';
+import CalendarComponent from './components/CalendarComponent.vue';
+
 
 
 
@@ -18,6 +18,7 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue, Ziggy)
+            .component('calendar-component', CalendarComponent)
             .mount(el);
     },
     progress: {
